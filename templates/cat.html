@@ -41,7 +41,7 @@
                   <h5 class="card-title">{{cat.name}}</h5>
                   <p class="card-text">Votes: {{cat.votes}}</p>
                   <!-- <a href="cats/{{cat.id}}" class="btn btn-primary">View details</a> -->
-                  <button class="btn btn-primary" onclick="count_votes({cat.id})" >Vote for me!!</button>
+                  <a href="{{url_for('vote_for_cat', id = cat.id)}}" >Vote for me!!</button>
 
 
                 </div>

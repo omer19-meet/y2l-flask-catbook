@@ -8,8 +8,8 @@ Base.metadata.create_all(engine)
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
-def create_cat(name, votes):
-    cat_object = Cat(name=name, votes=votes)
+def create_cat(name):
+    cat_object = Cat(name=name, votes=0)
     session.add(cat_object)
     session.commit()
 
@@ -25,7 +25,11 @@ def count_votes(id):
 	cat = session.query(Cat).filter_by(id=id).first()
 	# session.commit()
 	cat.votes += 1
-	session.commit()																																																																		
+	session.commit()
+
+def get_cat_by_name(name):
+	cat = session.query(Cat).filter_by(name = name).all()
+	return cat																																																																	
 	# return cat.votes
 # the goa;l of the function is 
 # 1) get the cat from the db

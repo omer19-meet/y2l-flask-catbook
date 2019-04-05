@@ -15,17 +15,22 @@ def get_cat_route(id):
     cat_1 = get_cat_by_id(id)
     return render_template('cat.html', cat= cat_1)
 
+@app.route('/vote/<int:id>')
+def vote_for_cat(id):
+	count_votes(id=id)
+	return redirect(url_for("get_cat_route", id=id))
+
     # Get cat with id from database
     # return render_template('cat.html', cat_1 )
 
-@app.route('/creat', methods=['GET', 'POST'])
+@app.route('/create', methods=['GET', 'POST'])
 def create_new_cat():
-	if request.method == 'POST':
+	if request.method == 'GET':
 		return render_template('create_cat.html')
 	else: 
-		name = request.input['name']
+		name = request.form['name']
 		votes=0
-		create_cat(name=name, votes=votes)
+		create_cat(name=name)
 		print("new cat added")
 		return render_template('respond.html')
 
